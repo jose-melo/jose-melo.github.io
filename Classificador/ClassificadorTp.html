@@ -33,6 +33,7 @@ import scipy as sci
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import time
 import plotly.express as px
 from sklearn import svm
 from sklearn.svm import SVC
@@ -42,6 +43,10 @@ from sklearn.model_selection import cross_val_predict
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 import itertools
+#from Utils import plot_cmatrix
+#from Utils import carrega
+#from Utils import carrega2
+
 
 class SVM_classifier:
     
@@ -130,19 +135,19 @@ class SVM_classifier:
         &#39;&#39;&#39;
         #print(&#34;Loading data from files: no failure&#34;)
         ini = time.time()
-        self.offX = SVM_classifier.carrega(&#39;offX.txt&#39;, path1, path2)
-        self.offY = SVM_classifier.carrega(&#39;offY.txt&#39;, path1, path2)
-        self.offYaw = SVM_classifier.carrega(&#39;offYaw.txt&#39;, path1, path2)
-        self.stdX = SVM_classifier.carrega(&#39;stdX.txt&#39;, path1, path2)
-        self.stdY = SVM_classifier.carrega(&#39;stdY.txt&#39;, path1, path2)
-        self.stdZ = SVM_classifier.carrega(&#39;stdZ.txt&#39;, path1, path2)
-        self.stdRoll = SVM_classifier.carrega(&#39;stdRoll.txt&#39;, path1, path2)
-        self.stdPitch = SVM_classifier.carrega(&#39;stdPitch.txt&#39;, path1, path2)
-        self.stdYaw = SVM_classifier.carrega(&#39;stdYaw.txt&#39;, path1, path2)
-        self.TX = SVM_classifier.carrega(&#39;TX.txt&#39;, path1, path2)
-        self.TY = SVM_classifier.carrega(&#39;TY.txt&#39;, path1, path2)
-        self.TYaw = SVM_classifier.carrega(&#39;TYaw.txt&#39;, path1, path2)
-        self.TYaw2 = SVM_classifier.carrega(&#39;TYaw2.txt&#39;, path1, path2)
+        self.offX = carrega(&#39;offX.txt&#39;, path1, path2)
+        self.offY = carrega(&#39;offY.txt&#39;, path1, path2)
+        self.offYaw = carrega(&#39;offYaw.txt&#39;, path1, path2)
+        self.stdX = carrega(&#39;stdX.txt&#39;, path1, path2)
+        self.stdY = carrega(&#39;stdY.txt&#39;, path1, path2)
+        self.stdZ = carrega(&#39;stdZ.txt&#39;, path1, path2)
+        self.stdRoll = carrega(&#39;stdRoll.txt&#39;, path1, path2)
+        self.stdPitch = carrega(&#39;stdPitch.txt&#39;, path1, path2)
+        self.stdYaw = carrega(&#39;stdYaw.txt&#39;, path1, path2)
+        self.TX = carrega(&#39;TX.txt&#39;, path1, path2)
+        self.TY = carrega(&#39;TY.txt&#39;, path1, path2)
+        self.TYaw = carrega(&#39;TYaw.txt&#39;, path1, path2)
+        self.TYaw2 = carrega(&#39;TYaw2.txt&#39;, path1, path2)
         fini = time.time()
         #print(&#34;Finished: &#34;, fini-ini, &#34; s&#34;)
     
@@ -153,19 +158,19 @@ class SVM_classifier:
         &#39;&#39;&#39;
         #print(&#34;Loading data from: &#34;+path)
         ini = time.time()
-        self.offX = SVM_classifier.carrega2(&#39;offX.txt&#39;, path)
-        self.offY = SVM_classifier.carrega2(&#39;offY.txt&#39;, path)
-        self.offYaw = SVM_classifier.carrega2(&#39;offYaw.txt&#39;, path)
-        self.stdX = SVM_classifier.carrega2(&#39;stdX.txt&#39;, path)
-        self.stdY = SVM_classifier.carrega2(&#39;stdY.txt&#39;, path)
-        self.stdZ = SVM_classifier.carrega2(&#39;stdZ.txt&#39;, path)
-        self.stdRoll = SVM_classifier.carrega2(&#39;stdRoll.txt&#39;, path)
-        self.stdPitch = SVM_classifier.carrega2(&#39;stdPitch.txt&#39;, path)
-        self.stdYaw = SVM_classifier.carrega2(&#39;stdYaw.txt&#39;, path)
-        self.TX = SVM_classifier.carrega2(&#39;TX.txt&#39;, path)
-        self.TY = SVM_classifier.carrega2(&#39;TY.txt&#39;, path)
-        self.TYaw = SVM_classifier.carrega2(&#39;TYaw.txt&#39;, path)
-        self.TYaw2 = SVM_classifier.carrega2(&#39;TYaw2.txt&#39;, path)
+        self.offX = carrega2(&#39;offX.txt&#39;, path)
+        self.offY = carrega2(&#39;offY.txt&#39;, path)
+        self.offYaw = carrega2(&#39;offYaw.txt&#39;, path)
+        self.stdX = carrega2(&#39;stdX.txt&#39;, path)
+        self.stdY = carrega2(&#39;stdY.txt&#39;, path)
+        self.stdZ = carrega2(&#39;stdZ.txt&#39;, path)
+        self.stdRoll = carrega2(&#39;stdRoll.txt&#39;, path)
+        self.stdPitch = carrega2(&#39;stdPitch.txt&#39;, path)
+        self.stdYaw = carrega2(&#39;stdYaw.txt&#39;, path)
+        self.TX = carrega2(&#39;TX.txt&#39;, path)
+        self.TY = carrega2(&#39;TY.txt&#39;, path)
+        self.TYaw = carrega2(&#39;TYaw.txt&#39;, path)
+        self.TYaw2 = carrega2(&#39;TYaw2.txt&#39;, path)
         fini = time.time()
         #print(&#34;Finished: &#34;, fini-ini, &#34; s&#34;)
         
@@ -506,7 +511,7 @@ class SVM_classifier:
         self.plotErrorGraphVar(&#39;TYaw&#39;, offXTest, offYTest, self.TYawpredicted, TYaw_target, self.errorTYaw, failureLine)
         
 
-    def predictClasses(self):
+    def predictClasses(self, classes_names, nlabels):
         &#39;&#39;&#39;
             ### Predict and plot the confusion matrix of the classifier
             #### **Validation:** 5-fold cross-validation
@@ -522,8 +527,7 @@ class SVM_classifier:
         scores = cross_val_score(classifier, X, y, cv=5)
         print(&#34;Accuracy: %0.2f (+/- %0.2f)&#34; % (scores.mean(), scores.std() * 2))
     
-        nlabels = 5
-        
+       
         kf = KFold(5, True)
         kf.get_n_splits(X)
 
@@ -729,19 +733,19 @@ that there was no failure. </p>
         &#39;&#39;&#39;
         #print(&#34;Loading data from files: no failure&#34;)
         ini = time.time()
-        self.offX = SVM_classifier.carrega(&#39;offX.txt&#39;, path1, path2)
-        self.offY = SVM_classifier.carrega(&#39;offY.txt&#39;, path1, path2)
-        self.offYaw = SVM_classifier.carrega(&#39;offYaw.txt&#39;, path1, path2)
-        self.stdX = SVM_classifier.carrega(&#39;stdX.txt&#39;, path1, path2)
-        self.stdY = SVM_classifier.carrega(&#39;stdY.txt&#39;, path1, path2)
-        self.stdZ = SVM_classifier.carrega(&#39;stdZ.txt&#39;, path1, path2)
-        self.stdRoll = SVM_classifier.carrega(&#39;stdRoll.txt&#39;, path1, path2)
-        self.stdPitch = SVM_classifier.carrega(&#39;stdPitch.txt&#39;, path1, path2)
-        self.stdYaw = SVM_classifier.carrega(&#39;stdYaw.txt&#39;, path1, path2)
-        self.TX = SVM_classifier.carrega(&#39;TX.txt&#39;, path1, path2)
-        self.TY = SVM_classifier.carrega(&#39;TY.txt&#39;, path1, path2)
-        self.TYaw = SVM_classifier.carrega(&#39;TYaw.txt&#39;, path1, path2)
-        self.TYaw2 = SVM_classifier.carrega(&#39;TYaw2.txt&#39;, path1, path2)
+        self.offX = carrega(&#39;offX.txt&#39;, path1, path2)
+        self.offY = carrega(&#39;offY.txt&#39;, path1, path2)
+        self.offYaw = carrega(&#39;offYaw.txt&#39;, path1, path2)
+        self.stdX = carrega(&#39;stdX.txt&#39;, path1, path2)
+        self.stdY = carrega(&#39;stdY.txt&#39;, path1, path2)
+        self.stdZ = carrega(&#39;stdZ.txt&#39;, path1, path2)
+        self.stdRoll = carrega(&#39;stdRoll.txt&#39;, path1, path2)
+        self.stdPitch = carrega(&#39;stdPitch.txt&#39;, path1, path2)
+        self.stdYaw = carrega(&#39;stdYaw.txt&#39;, path1, path2)
+        self.TX = carrega(&#39;TX.txt&#39;, path1, path2)
+        self.TY = carrega(&#39;TY.txt&#39;, path1, path2)
+        self.TYaw = carrega(&#39;TYaw.txt&#39;, path1, path2)
+        self.TYaw2 = carrega(&#39;TYaw2.txt&#39;, path1, path2)
         fini = time.time()
         #print(&#34;Finished: &#34;, fini-ini, &#34; s&#34;)
     
@@ -752,19 +756,19 @@ that there was no failure. </p>
         &#39;&#39;&#39;
         #print(&#34;Loading data from: &#34;+path)
         ini = time.time()
-        self.offX = SVM_classifier.carrega2(&#39;offX.txt&#39;, path)
-        self.offY = SVM_classifier.carrega2(&#39;offY.txt&#39;, path)
-        self.offYaw = SVM_classifier.carrega2(&#39;offYaw.txt&#39;, path)
-        self.stdX = SVM_classifier.carrega2(&#39;stdX.txt&#39;, path)
-        self.stdY = SVM_classifier.carrega2(&#39;stdY.txt&#39;, path)
-        self.stdZ = SVM_classifier.carrega2(&#39;stdZ.txt&#39;, path)
-        self.stdRoll = SVM_classifier.carrega2(&#39;stdRoll.txt&#39;, path)
-        self.stdPitch = SVM_classifier.carrega2(&#39;stdPitch.txt&#39;, path)
-        self.stdYaw = SVM_classifier.carrega2(&#39;stdYaw.txt&#39;, path)
-        self.TX = SVM_classifier.carrega2(&#39;TX.txt&#39;, path)
-        self.TY = SVM_classifier.carrega2(&#39;TY.txt&#39;, path)
-        self.TYaw = SVM_classifier.carrega2(&#39;TYaw.txt&#39;, path)
-        self.TYaw2 = SVM_classifier.carrega2(&#39;TYaw2.txt&#39;, path)
+        self.offX = carrega2(&#39;offX.txt&#39;, path)
+        self.offY = carrega2(&#39;offY.txt&#39;, path)
+        self.offYaw = carrega2(&#39;offYaw.txt&#39;, path)
+        self.stdX = carrega2(&#39;stdX.txt&#39;, path)
+        self.stdY = carrega2(&#39;stdY.txt&#39;, path)
+        self.stdZ = carrega2(&#39;stdZ.txt&#39;, path)
+        self.stdRoll = carrega2(&#39;stdRoll.txt&#39;, path)
+        self.stdPitch = carrega2(&#39;stdPitch.txt&#39;, path)
+        self.stdYaw = carrega2(&#39;stdYaw.txt&#39;, path)
+        self.TX = carrega2(&#39;TX.txt&#39;, path)
+        self.TY = carrega2(&#39;TY.txt&#39;, path)
+        self.TYaw = carrega2(&#39;TYaw.txt&#39;, path)
+        self.TYaw2 = carrega2(&#39;TYaw2.txt&#39;, path)
         fini = time.time()
         #print(&#34;Finished: &#34;, fini-ini, &#34; s&#34;)
         
@@ -1105,7 +1109,7 @@ that there was no failure. </p>
         self.plotErrorGraphVar(&#39;TYaw&#39;, offXTest, offYTest, self.TYawpredicted, TYaw_target, self.errorTYaw, failureLine)
         
 
-    def predictClasses(self):
+    def predictClasses(self, classes_names, nlabels):
         &#39;&#39;&#39;
             ### Predict and plot the confusion matrix of the classifier
             #### **Validation:** 5-fold cross-validation
@@ -1121,8 +1125,7 @@ that there was no failure. </p>
         scores = cross_val_score(classifier, X, y, cv=5)
         print(&#34;Accuracy: %0.2f (+/- %0.2f)&#34; % (scores.mean(), scores.std() * 2))
     
-        nlabels = 5
-        
+       
         kf = KFold(5, True)
         kf.get_n_splits(X)
 
@@ -1185,19 +1188,19 @@ that there was no failure. </p>
     &#39;&#39;&#39;
     #print(&#34;Loading data from: &#34;+path)
     ini = time.time()
-    self.offX = SVM_classifier.carrega2(&#39;offX.txt&#39;, path)
-    self.offY = SVM_classifier.carrega2(&#39;offY.txt&#39;, path)
-    self.offYaw = SVM_classifier.carrega2(&#39;offYaw.txt&#39;, path)
-    self.stdX = SVM_classifier.carrega2(&#39;stdX.txt&#39;, path)
-    self.stdY = SVM_classifier.carrega2(&#39;stdY.txt&#39;, path)
-    self.stdZ = SVM_classifier.carrega2(&#39;stdZ.txt&#39;, path)
-    self.stdRoll = SVM_classifier.carrega2(&#39;stdRoll.txt&#39;, path)
-    self.stdPitch = SVM_classifier.carrega2(&#39;stdPitch.txt&#39;, path)
-    self.stdYaw = SVM_classifier.carrega2(&#39;stdYaw.txt&#39;, path)
-    self.TX = SVM_classifier.carrega2(&#39;TX.txt&#39;, path)
-    self.TY = SVM_classifier.carrega2(&#39;TY.txt&#39;, path)
-    self.TYaw = SVM_classifier.carrega2(&#39;TYaw.txt&#39;, path)
-    self.TYaw2 = SVM_classifier.carrega2(&#39;TYaw2.txt&#39;, path)
+    self.offX = carrega2(&#39;offX.txt&#39;, path)
+    self.offY = carrega2(&#39;offY.txt&#39;, path)
+    self.offYaw = carrega2(&#39;offYaw.txt&#39;, path)
+    self.stdX = carrega2(&#39;stdX.txt&#39;, path)
+    self.stdY = carrega2(&#39;stdY.txt&#39;, path)
+    self.stdZ = carrega2(&#39;stdZ.txt&#39;, path)
+    self.stdRoll = carrega2(&#39;stdRoll.txt&#39;, path)
+    self.stdPitch = carrega2(&#39;stdPitch.txt&#39;, path)
+    self.stdYaw = carrega2(&#39;stdYaw.txt&#39;, path)
+    self.TX = carrega2(&#39;TX.txt&#39;, path)
+    self.TY = carrega2(&#39;TY.txt&#39;, path)
+    self.TYaw = carrega2(&#39;TYaw.txt&#39;, path)
+    self.TYaw2 = carrega2(&#39;TYaw2.txt&#39;, path)
     fini = time.time()</code></pre>
 </details>
 </dd>
@@ -1217,19 +1220,19 @@ that there was no failure. </p>
     &#39;&#39;&#39;
     #print(&#34;Loading data from files: no failure&#34;)
     ini = time.time()
-    self.offX = SVM_classifier.carrega(&#39;offX.txt&#39;, path1, path2)
-    self.offY = SVM_classifier.carrega(&#39;offY.txt&#39;, path1, path2)
-    self.offYaw = SVM_classifier.carrega(&#39;offYaw.txt&#39;, path1, path2)
-    self.stdX = SVM_classifier.carrega(&#39;stdX.txt&#39;, path1, path2)
-    self.stdY = SVM_classifier.carrega(&#39;stdY.txt&#39;, path1, path2)
-    self.stdZ = SVM_classifier.carrega(&#39;stdZ.txt&#39;, path1, path2)
-    self.stdRoll = SVM_classifier.carrega(&#39;stdRoll.txt&#39;, path1, path2)
-    self.stdPitch = SVM_classifier.carrega(&#39;stdPitch.txt&#39;, path1, path2)
-    self.stdYaw = SVM_classifier.carrega(&#39;stdYaw.txt&#39;, path1, path2)
-    self.TX = SVM_classifier.carrega(&#39;TX.txt&#39;, path1, path2)
-    self.TY = SVM_classifier.carrega(&#39;TY.txt&#39;, path1, path2)
-    self.TYaw = SVM_classifier.carrega(&#39;TYaw.txt&#39;, path1, path2)
-    self.TYaw2 = SVM_classifier.carrega(&#39;TYaw2.txt&#39;, path1, path2)
+    self.offX = carrega(&#39;offX.txt&#39;, path1, path2)
+    self.offY = carrega(&#39;offY.txt&#39;, path1, path2)
+    self.offYaw = carrega(&#39;offYaw.txt&#39;, path1, path2)
+    self.stdX = carrega(&#39;stdX.txt&#39;, path1, path2)
+    self.stdY = carrega(&#39;stdY.txt&#39;, path1, path2)
+    self.stdZ = carrega(&#39;stdZ.txt&#39;, path1, path2)
+    self.stdRoll = carrega(&#39;stdRoll.txt&#39;, path1, path2)
+    self.stdPitch = carrega(&#39;stdPitch.txt&#39;, path1, path2)
+    self.stdYaw = carrega(&#39;stdYaw.txt&#39;, path1, path2)
+    self.TX = carrega(&#39;TX.txt&#39;, path1, path2)
+    self.TY = carrega(&#39;TY.txt&#39;, path1, path2)
+    self.TYaw = carrega(&#39;TYaw.txt&#39;, path1, path2)
+    self.TYaw2 = carrega(&#39;TYaw2.txt&#39;, path1, path2)
     fini = time.time()</code></pre>
 </details>
 </dd>
@@ -1616,7 +1619,7 @@ that there was no failure. </p>
 </details>
 </dd>
 <dt id="Frequencia_Natural.Classificador.ClassificadorTp.SVM_classifier.predictClasses"><code class="name flex">
-<span>def <span class="ident">predictClasses</span></span>(<span>self)</span>
+<span>def <span class="ident">predictClasses</span></span>(<span>self, classes_names, nlabels)</span>
 </code></dt>
 <dd>
 <div class="desc"><h3 id="predict-and-plot-the-confusion-matrix-of-the-classifier">Predict and plot the confusion matrix of the classifier</h3>
@@ -1625,7 +1628,7 @@ that there was no failure. </p>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def predictClasses(self):
+<pre><code class="python">def predictClasses(self, classes_names, nlabels):
     &#39;&#39;&#39;
         ### Predict and plot the confusion matrix of the classifier
         #### **Validation:** 5-fold cross-validation
@@ -1641,8 +1644,7 @@ that there was no failure. </p>
     scores = cross_val_score(classifier, X, y, cv=5)
     print(&#34;Accuracy: %0.2f (+/- %0.2f)&#34; % (scores.mean(), scores.std() * 2))
 
-    nlabels = 5
-    
+   
     kf = KFold(5, True)
     kf.get_n_splits(X)
 

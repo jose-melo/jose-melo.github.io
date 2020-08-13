@@ -28,25 +28,144 @@
 </summary>
 <pre><code class="python">import numpy as np
 from matplotlib import pyplot as plt
+import os
+import itertools
+
+def loadValues(txt):
+    
+    &#39;&#39;&#39;
+        ### Reads the values of period and position. These files were generated for the above function.
+        
+          - params:
+            1. **path:** Path of the folders.
+            2. **txt:**  Name of the file to read. Also specifies the value.
+        
+        ### Name of the files:
+            1. offX.txt
+            2. offY.txt
+            3. offYaw.txt
+            4. stdX.txt
+            5. stdY.txt
+            6. stdZ.txt
+            7. stdRoll.txt
+            8. stdPitch.txt
+            9. stdYaw.txt
+            10. TX.txt
+            11. TY.txt
+            12 .TYaw.txt
+            
+    &#39;&#39;&#39;
+    
+    lista = []
+    path = &#34;saves&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+    
+    os.chdir(&#39;..&#39;)
+    
+    path = &#34;saves-1001-2900&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+
+    os.chdir(&#39;..&#39;)
+    
+    return lista
+
+def carrega2(txt, path):
+    &#39;&#39;&#39;
+        ### Reads a .txt file when a single path is required.
+
+          - params:
+            1. **txt :** File name
+            2. **path:** File path
+ 
+          - returns:
+            1. **list:** Python list with the data
+    &#39;&#39;&#39;
+
+
+    lista = []
+    os.chdir(path)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+        for i in linhas:
+            lista.append(float(i))
+    except Exception as e:
+        
+        print(e)
+        
+    os.chdir(&#39;..&#39;)
+    return lista    
+
+def carrega(txt, path1, path2):
+    &#39;&#39;&#39;
+        ### Reads .txt files when 2 paths are required.
+
+          - params:
+            1. **txt:**  File name
+            2. **path:** File path
+ 
+          - returns:
+            1. **list:** Python list with the data
+    &#39;&#39;&#39;
+
+    lista = []
+    os.chdir(path1)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+        for i in linhas:
+            lista.append(float(i))
+    except Exception as e:
+        
+        print(e)
+    
+    os.chdir(&#39;..&#39;)
+
+    os.chdir(path2)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+
+        for i in linhas:
+            lista.append(float(i))
+
+    except Exception as e:
+        
+        print(e)
+
+    os.chdir(&#39;..&#39;)
+    return lista
 
 def plot_cmatrix(matrix,      class_names,
                           title=&#39;Confusion matrix&#39;,
                           gradient=None,
                           proportions=True):
     &#34;&#34;&#34;
-    It constructs and plots the confusion matrix
+        ### It constructs and plots the confusion matrix
 
-    Arguments
-    ---------
-    matrix:      Input matrix with prediction results
+          - params:
+              1. **matrix:** Input matrix with prediction results
 
-    class_names: Name of the classes, ex: [&#39;L01&#39;, &#39;L05&#39;, &#39;L09&#39;, &#39;no_failure&#39;]
+              2. **class_names:** Name of the classes, ex: [&#39;L01&#39;, &#39;L05&#39;, &#39;L09&#39;, &#39;no_failure&#39;]
 
-    title:       Title of the plot
+              3. **title:**  Title of the plot
 
-    gradient:    Python colormap
+              4. **gradient:**    Python colormap
 
-    proportions:  True plot the proportions, False plot the raw values
+              5. **proportions:**  True plot the proportions, False plot the raw values
     
     &#34;&#34;&#34;
 
@@ -95,27 +214,237 @@ def plot_cmatrix(matrix,      class_names,
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="Frequencia_Natural.Classificador.Utils.carrega"><code class="name flex">
+<span>def <span class="ident">carrega</span></span>(<span>txt, path1, path2)</span>
+</code></dt>
+<dd>
+<div class="desc"><h3 id="reads-txt-files-when-2-paths-are-required">Reads .txt files when 2 paths are required.</h3>
+<ul>
+<li>
+<p>params:</p>
+<ol>
+<li><strong>txt:</strong>
+File name</li>
+<li><strong>path:</strong> File path</li>
+</ol>
+</li>
+<li>
+<p>returns:</p>
+<ol>
+<li><strong>list:</strong> Python list with the data</li>
+</ol>
+</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def carrega(txt, path1, path2):
+    &#39;&#39;&#39;
+        ### Reads .txt files when 2 paths are required.
+
+          - params:
+            1. **txt:**  File name
+            2. **path:** File path
+ 
+          - returns:
+            1. **list:** Python list with the data
+    &#39;&#39;&#39;
+
+    lista = []
+    os.chdir(path1)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+        for i in linhas:
+            lista.append(float(i))
+    except Exception as e:
+        
+        print(e)
+    
+    os.chdir(&#39;..&#39;)
+
+    os.chdir(path2)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+
+        for i in linhas:
+            lista.append(float(i))
+
+    except Exception as e:
+        
+        print(e)
+
+    os.chdir(&#39;..&#39;)
+    return lista</code></pre>
+</details>
+</dd>
+<dt id="Frequencia_Natural.Classificador.Utils.carrega2"><code class="name flex">
+<span>def <span class="ident">carrega2</span></span>(<span>txt, path)</span>
+</code></dt>
+<dd>
+<div class="desc"><h3 id="reads-a-txt-file-when-a-single-path-is-required">Reads a .txt file when a single path is required.</h3>
+<ul>
+<li>
+<p>params:</p>
+<ol>
+<li><strong>txt :</strong> File name</li>
+<li><strong>path:</strong> File path</li>
+</ol>
+</li>
+<li>
+<p>returns:</p>
+<ol>
+<li><strong>list:</strong> Python list with the data</li>
+</ol>
+</li>
+</ul></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def carrega2(txt, path):
+    &#39;&#39;&#39;
+        ### Reads a .txt file when a single path is required.
+
+          - params:
+            1. **txt :** File name
+            2. **path:** File path
+ 
+          - returns:
+            1. **list:** Python list with the data
+    &#39;&#39;&#39;
+
+
+    lista = []
+    os.chdir(path)
+    try:
+        arq = open(txt, &#39;r&#39;)
+        linhas = arq.readlines()
+        arq.close()
+        for i in linhas:
+            lista.append(float(i))
+    except Exception as e:
+        
+        print(e)
+        
+    os.chdir(&#39;..&#39;)
+    return lista    </code></pre>
+</details>
+</dd>
+<dt id="Frequencia_Natural.Classificador.Utils.loadValues"><code class="name flex">
+<span>def <span class="ident">loadValues</span></span>(<span>txt)</span>
+</code></dt>
+<dd>
+<div class="desc"><h3 id="reads-the-values-of-period-and-position-these-files-were-generated-for-the-above-function">Reads the values of period and position. These files were generated for the above function.</h3>
+<ul>
+<li>params:<ol>
+<li><strong>path:</strong> Path of the folders.</li>
+<li><strong>txt:</strong>
+Name of the file to read. Also specifies the value.</li>
+</ol>
+</li>
+</ul>
+<h3 id="name-of-the-files">Name of the files:</h3>
+<pre><code>1. offX.txt
+2. offY.txt
+3. offYaw.txt
+4. stdX.txt
+5. stdY.txt
+6. stdZ.txt
+7. stdRoll.txt
+8. stdPitch.txt
+9. stdYaw.txt
+10. TX.txt
+11. TY.txt
+12 .TYaw.txt
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def loadValues(txt):
+    
+    &#39;&#39;&#39;
+        ### Reads the values of period and position. These files were generated for the above function.
+        
+          - params:
+            1. **path:** Path of the folders.
+            2. **txt:**  Name of the file to read. Also specifies the value.
+        
+        ### Name of the files:
+            1. offX.txt
+            2. offY.txt
+            3. offYaw.txt
+            4. stdX.txt
+            5. stdY.txt
+            6. stdZ.txt
+            7. stdRoll.txt
+            8. stdPitch.txt
+            9. stdYaw.txt
+            10. TX.txt
+            11. TY.txt
+            12 .TYaw.txt
+            
+    &#39;&#39;&#39;
+    
+    lista = []
+    path = &#34;saves&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+    
+    os.chdir(&#39;..&#39;)
+    
+    path = &#34;saves-1001-2900&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+
+    os.chdir(&#39;..&#39;)
+    
+    return lista</code></pre>
+</details>
+</dd>
 <dt id="Frequencia_Natural.Classificador.Utils.plot_cmatrix"><code class="name flex">
 <span>def <span class="ident">plot_cmatrix</span></span>(<span>matrix, class_names, title='Confusion matrix', gradient=None, proportions=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>It constructs and plots the confusion matrix</p>
-<h2 id="arguments">Arguments</h2>
-<dl>
-<dt><strong><code>matrix</code></strong> :&ensp;<code>
-Input matrix with prediction results</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>class_names</code></strong> :&ensp;<code>Name</code> of <code>the classes, ex: ['L01', 'L05', 'L09', 'no_failure']</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>title</code></strong> :&ensp;<code>
-Title</code> of <code>the plot</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>gradient</code></strong> :&ensp;<code>
-Python colormap</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>proportions</code></strong> :&ensp;<code> True plot the proportions, False plot the raw values</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
+<div class="desc"><h3 id="it-constructs-and-plots-the-confusion-matrix">It constructs and plots the confusion matrix</h3>
+<ul>
+<li>
+<p>params:</p>
+<ol>
+<li>
+<p><strong>matrix:</strong> Input matrix with prediction results</p>
+</li>
+<li>
+<p><strong>class_names:</strong> Name of the classes, ex: ['L01', 'L05', 'L09', 'no_failure']</p>
+</li>
+<li>
+<p><strong>title:</strong>
+Title of the plot</p>
+</li>
+<li>
+<p><strong>gradient:</strong>
+Python colormap</p>
+</li>
+<li>
+<p><strong>proportions:</strong>
+True plot the proportions, False plot the raw values</p>
+</li>
+</ol>
+</li>
+</ul></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -125,19 +454,18 @@ Python colormap</code></dt>
                           gradient=None,
                           proportions=True):
     &#34;&#34;&#34;
-    It constructs and plots the confusion matrix
+        ### It constructs and plots the confusion matrix
 
-    Arguments
-    ---------
-    matrix:      Input matrix with prediction results
+          - params:
+              1. **matrix:** Input matrix with prediction results
 
-    class_names: Name of the classes, ex: [&#39;L01&#39;, &#39;L05&#39;, &#39;L09&#39;, &#39;no_failure&#39;]
+              2. **class_names:** Name of the classes, ex: [&#39;L01&#39;, &#39;L05&#39;, &#39;L09&#39;, &#39;no_failure&#39;]
 
-    title:       Title of the plot
+              3. **title:**  Title of the plot
 
-    gradient:    Python colormap
+              4. **gradient:**    Python colormap
 
-    proportions:  True plot the proportions, False plot the raw values
+              5. **proportions:**  True plot the proportions, False plot the raw values
     
     &#34;&#34;&#34;
 
@@ -197,6 +525,9 @@ Python colormap</code></dt>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="Frequencia_Natural.Classificador.Utils.carrega" href="#Frequencia_Natural.Classificador.Utils.carrega">carrega</a></code></li>
+<li><code><a title="Frequencia_Natural.Classificador.Utils.carrega2" href="#Frequencia_Natural.Classificador.Utils.carrega2">carrega2</a></code></li>
+<li><code><a title="Frequencia_Natural.Classificador.Utils.loadValues" href="#Frequencia_Natural.Classificador.Utils.loadValues">loadValues</a></code></li>
 <li><code><a title="Frequencia_Natural.Classificador.Utils.plot_cmatrix" href="#Frequencia_Natural.Classificador.Utils.plot_cmatrix">plot_cmatrix</a></code></li>
 </ul>
 </li>

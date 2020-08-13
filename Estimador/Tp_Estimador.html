@@ -28,13 +28,17 @@
 </summary>
 <pre><code class="python">#!/usr/bin/env python
 
+import scipy as sci
 from scipy import signal
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+#from Utils import repete
+#from Utils import autoCorrelation
+#from Moments_Utils import getMomentCentered
+import plotly.express as px
 
-
-def getNaturalPeriod_AutoCorrelation(serie, center):
+def getNaturalPeriod_AutoCorrelation(serie, center, N):
 
     &#39;&#39;&#39;
       ### Calculates the natural period from serie using the autocorrelation function. 
@@ -46,6 +50,7 @@ def getNaturalPeriod_AutoCorrelation(serie, center):
         - params: 
           1. **serie:** Input temporal series
           2. **center:** Expected value
+          3. **N:** Window size
 
         - local params:
           1. **N:** Number of points per window. 
@@ -58,7 +63,6 @@ def getNaturalPeriod_AutoCorrelation(serie, center):
     &#39;&#39;&#39;
 
     measuredTp = []
-    N = 7200
     delta =  int(0.01*N)
     div = 1
 
@@ -128,7 +132,7 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
           2. **center   :**   Expeted value to measure
           3. **delta    :**   The size of each half of the frequency window interval 
           4. **time     :**   Time axis
-          5. **graph    :**   Debub variable. If equals 1, the function plots graphs.
+          5. **graph    :**   Debug variable. If equals 1, the function plots graphs.
           6. **rep      :**   Number of repetition of each window
           7. **N        :**   Number of points per window.
           8. **div      :**    Number of divisions per window. (Used to calculate mean values)
@@ -179,7 +183,7 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="Frequencia_Natural.Estimador.Tp_Estimador.getNaturalPeriod_AutoCorrelation"><code class="name flex">
-<span>def <span class="ident">getNaturalPeriod_AutoCorrelation</span></span>(<span>serie, center)</span>
+<span>def <span class="ident">getNaturalPeriod_AutoCorrelation</span></span>(<span>serie, center, N)</span>
 </code></dt>
 <dd>
 <div class="desc"><h3 id="calculates-the-natural-period-from-serie-using-the-autocorrelation-function">Calculates the natural period from serie using the autocorrelation function.</h3>
@@ -191,6 +195,7 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
 <ol>
 <li><strong>serie:</strong> Input temporal series</li>
 <li><strong>center:</strong> Expected value</li>
+<li><strong>N:</strong> Window size</li>
 </ol>
 </li>
 <li>
@@ -212,7 +217,7 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def getNaturalPeriod_AutoCorrelation(serie, center):
+<pre><code class="python">def getNaturalPeriod_AutoCorrelation(serie, center, N):
 
     &#39;&#39;&#39;
       ### Calculates the natural period from serie using the autocorrelation function. 
@@ -224,6 +229,7 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
         - params: 
           1. **serie:** Input temporal series
           2. **center:** Expected value
+          3. **N:** Window size
 
         - local params:
           1. **N:** Number of points per window. 
@@ -236,7 +242,6 @@ def getNaturalPeriod_Welch(center, delta, serie, time, graph, rep, N, div):
     &#39;&#39;&#39;
 
     measuredTp = []
-    N = 7200
     delta =  int(0.01*N)
     div = 1
 
@@ -317,7 +322,7 @@ The size of each half of the frequency window interval </li>
 Time axis</li>
 <li><strong>graph
 :</strong>
-Debub variable. If equals 1, the function plots graphs.</li>
+Debug variable. If equals 1, the function plots graphs.</li>
 <li><strong>rep
 :</strong>
 Number of repetition of each window</li>
@@ -361,7 +366,7 @@ Steps for the scrolling window (# of displaced points)</li>
           2. **center   :**   Expeted value to measure
           3. **delta    :**   The size of each half of the frequency window interval 
           4. **time     :**   Time axis
-          5. **graph    :**   Debub variable. If equals 1, the function plots graphs.
+          5. **graph    :**   Debug variable. If equals 1, the function plots graphs.
           6. **rep      :**   Number of repetition of each window
           7. **N        :**   Number of points per window.
           8. **div      :**    Number of divisions per window. (Used to calculate mean values)

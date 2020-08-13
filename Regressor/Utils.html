@@ -29,6 +29,54 @@
 <pre><code class="python">    
 import os
 
+def loadValues(txt):
+    
+    &#39;&#39;&#39;
+        ### Reads the values of period and position. These files were generated for the above function.
+        
+          - params:
+            1. **path:** Path of the folders.
+            2. **txt:**  Name of the file to read. Also specifies the value.
+        
+        ### Name of the files:
+            1. offX.txt
+            2. offY.txt
+            3. offYaw.txt
+            4. stdX.txt
+            5. stdY.txt
+            6. stdZ.txt
+            7. stdRoll.txt
+            8. stdPitch.txt
+            9. stdYaw.txt
+            10. TX.txt
+            11. TY.txt
+            12 .TYaw.txt
+            
+    &#39;&#39;&#39;
+    
+    lista = []
+    path = &#34;saves&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+    
+    os.chdir(&#39;..&#39;)
+    
+    path = &#34;saves-1001-2900&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+
+    os.chdir(&#39;..&#39;)
+    
+    return lista
+
 def carrega2(txt, path):
     &#39;&#39;&#39;
         ### Reads a .txt file when a single path is required.
@@ -228,6 +276,86 @@ File name</li>
     return lista    </code></pre>
 </details>
 </dd>
+<dt id="Frequencia_Natural.Regressor.Utils.loadValues"><code class="name flex">
+<span>def <span class="ident">loadValues</span></span>(<span>txt)</span>
+</code></dt>
+<dd>
+<div class="desc"><h3 id="reads-the-values-of-period-and-position-these-files-were-generated-for-the-above-function">Reads the values of period and position. These files were generated for the above function.</h3>
+<ul>
+<li>params:<ol>
+<li><strong>path:</strong> Path of the folders.</li>
+<li><strong>txt:</strong>
+Name of the file to read. Also specifies the value.</li>
+</ol>
+</li>
+</ul>
+<h3 id="name-of-the-files">Name of the files:</h3>
+<pre><code>1. offX.txt
+2. offY.txt
+3. offYaw.txt
+4. stdX.txt
+5. stdY.txt
+6. stdZ.txt
+7. stdRoll.txt
+8. stdPitch.txt
+9. stdYaw.txt
+10. TX.txt
+11. TY.txt
+12 .TYaw.txt
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def loadValues(txt):
+    
+    &#39;&#39;&#39;
+        ### Reads the values of period and position. These files were generated for the above function.
+        
+          - params:
+            1. **path:** Path of the folders.
+            2. **txt:**  Name of the file to read. Also specifies the value.
+        
+        ### Name of the files:
+            1. offX.txt
+            2. offY.txt
+            3. offYaw.txt
+            4. stdX.txt
+            5. stdY.txt
+            6. stdZ.txt
+            7. stdRoll.txt
+            8. stdPitch.txt
+            9. stdYaw.txt
+            10. TX.txt
+            11. TY.txt
+            12 .TYaw.txt
+            
+    &#39;&#39;&#39;
+    
+    lista = []
+    path = &#34;saves&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+    
+    os.chdir(&#39;..&#39;)
+    
+    path = &#34;saves-1001-2900&#34;
+    os.chdir(path)
+    arq = open(txt, &#39;r&#39;)
+    linhas = arq.readlines()
+    arq.close()
+    for i in linhas:
+        lista.append(float(i))
+
+    os.chdir(&#39;..&#39;)
+    
+    return lista</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -248,6 +376,7 @@ File name</li>
 <ul class="">
 <li><code><a title="Frequencia_Natural.Regressor.Utils.carrega" href="#Frequencia_Natural.Regressor.Utils.carrega">carrega</a></code></li>
 <li><code><a title="Frequencia_Natural.Regressor.Utils.carrega2" href="#Frequencia_Natural.Regressor.Utils.carrega2">carrega2</a></code></li>
+<li><code><a title="Frequencia_Natural.Regressor.Utils.loadValues" href="#Frequencia_Natural.Regressor.Utils.loadValues">loadValues</a></code></li>
 </ul>
 </li>
 </ul>
